@@ -41,7 +41,16 @@
                   </h4>
                   <div class="mb-1 text-muted">Nov 12</div>
                   <p class="card-text mb-auto"><%= post.content.truncate(50) %></p>
-                    <%= link_to "編集", description_post_path(post)%>
+                  <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      投稿内容を編集する
+                    </button>
+                    <div class="dropdown-menu">
+                      <%= link_to "タイトル、紹介文編集", description_post_path(post),class:"dropdown-item"%>
+                      <%= link_to "画像編集", photo_upload_post_path(post), class:"dropdown-item" %>
+                      <%= link_to "動画編集", video_post_path(post), class:"dropdown-item" %>
+                    </div>
+                  </div>
                 </div>
                 <%= image_tag post.cover_photo(nil),class:"card-img-right flex-auto d-none d-lg-block", style:"width: 300px; height: 210px;"%>
               </div>

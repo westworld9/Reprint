@@ -5,15 +5,13 @@
     <% @photos.each do |photo| %> 
       <div class="col-md-4">
         <div class="card"> 
-          <div class="card-header preview">
+          <div class="card-header list">
             <%= image_tag photo.image.url() %>
           </div>
           <div class="card-body"> 
-            <span class="pull-right"> 
               <%= link_to post_photo_path(photo.post_id, photo), remote: true, method: :delete, data: { confirm: "削除してよろしいですか" } do %> 
                 <i class="fas fa-trash-alt"></i>
               <% end %>
-            </span>
           </div>
         </div>
        </div>

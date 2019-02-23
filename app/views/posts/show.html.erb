@@ -27,10 +27,10 @@
       <div class="text-babu">
         <div class="row text-center row-space-1">
           <div class="col-md-6">
-            <i class="fas fa-home fa-2x"></i>
+            <i class="fas fa-compact-disc fa-3x"></i>
           </div>
           <div class="col-md-6">
-            <i class="fas fa-user fa-2x"></i>
+            <i class="fas fa-th fa-3x"></i>
           </div>
         </div>
   
@@ -71,7 +71,7 @@
             <div class="carousel-inner">
               <% @photos.each do |photo| %>
                 <div class="carousel-item <%= 'active' if photo.id == @photos[0].id %>">
-                  <%= image_tag photo.image.url(), width: "100%" %>
+                  <%= image_tag photo.image.url(), width: "100%"%>
                 </div>
               <% end %>
             </div>

@@ -6,16 +6,14 @@ ja:
     attributes:
       post:
         title: "タイトル"
-        content: "内容"
-      contact:
-        name: "名前"
-        email: "メールアドレス"
-        content: "内容"
+        content: "紹介文"
+        description: "リクエストした理由"
+        genre: "ジャンル"
+        category: "カテゴリー"
       user:
         title: "タイトル"
         name: "名前"
         email: "メールアドレス"
-        content: "内容"
         current_password: "現在のパスワード"
         password: "パスワード"
         password_confirmation: "確認用パスワード"

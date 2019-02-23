@@ -1,17 +1,20 @@
-<ul class="sidebar-list"> 
-  <li class="sidebar-item"> 
-    <%= link_to "タイトル、紹介文、リクエスト理由", description_post_path, class:"sidebar-link active" %>
-  </li>
-  <li class="sidebar-item"> 
-    <%= link_to "写真一覧", photo_upload_post_path, class:"sidebar-link active" %>
-  </li>
-  <li class="sidebar-item"> 
-    <%= link_to "動画", video_post_path, class:"sidebar-link active" %>
-  </li>
-  <li class="sidebar-item"> 
-    <%= link_to "投稿詳細", post_path(@post), class:"sidebar-link active" %>
-  </li>
-   <li class="sidebar-item"> 
-    <%= link_to "投稿を削除する", post_path(@post), method: :delete, data: { confirm: "削除してよろしいですか" }, class:"sidebar-link active" %>
-  </li>
-</ul>
+<nav class="mb-3"> 
+  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+    <%= link_to description_post_path,class:"nav-item nav-link active", id:"nav-home-tab" do %>
+      タイトル、紹介文、リクエスト理由<i class="far fa-arrow-alt-circle-right ml-2"></i>
+    <% end %>
+    <%= link_to photo_upload_post_path,class:"nav-item nav-link", id:"nav-profile-tab" do %>
+      画像一覧<i class="far fa-arrow-alt-circle-right ml-2"></i>
+    <% end %>
+  　<%= link_to video_post_path,class:"nav-item nav-link", id:"nav-contact-tab" do %>
+      動画URL<i class="far fa-arrow-alt-circle-right ml-2"></i>
+    <% end %>
+    <%= link_to post_path(@post.id),class:"nav-item nav-link", id:"nav-about-tab" do %>
+      <i class="fas fa-cog mr-2"></i>投稿詳細
+    <% end %>
+    <%= link_to post_path(@post.id),class:"nav-item nav-link danger", id:"nav-about-tab", method: :delete, data: { confirm: "削除してよろしいですか" } do %>
+      <i class="fas fa-trash-alt mr-2"></i>投稿を削除する
+    <% end %>
+  </div>
+</nav>          
+        
