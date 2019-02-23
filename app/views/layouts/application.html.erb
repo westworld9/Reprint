@@ -9,6 +9,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/message' %>
+     <div class="mt-5">
+       <%= yield %>
+     </div>
   </body>
 </html>

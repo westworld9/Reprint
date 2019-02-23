@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <%= image_tag @post.cover_photo(nil), width: "100%" %>
+    </div>
+  </div>
+  <br/>
+  
+  <div class="row">
+    <div class="card col-md-8">
+      <div class="row"> 
+        <div class="col-md-8 mt-4">
+          <h2 class="font-weight-bold"><%= @post.title %></h2>
+        </div>
+        <div class="col-md-4 text-center mt-4">
+            <% if @post.user.avatar.url.present? %>
+              <%= image_tag @post.user.avatar.url, class: "img-circle avatar-large" %><br>
+           <% else %>
+              <%= image_tag "/assets/icon.png",  class:"img-circle avatar-large" %>
+            <% end %>
+          <%= @post.user.name %>
+        </div>
+      </div>
+      <hr/>
+      
+  
+      <div class="text-babu">
+        <div class="row text-center row-space-1">
+          <div class="col-md-6">
+            <i class="fas fa-home fa-2x"></i>
+          </div>
+          <div class="col-md-6">
+            <i class="fas fa-user fa-2x"></i>
+          </div>
+        </div>
+  
+        <div class="row text-center">
+          <div class="col-md-6"><%= @post.category %></div>
+          <div class="col-md-6"><%= @post.genre %></div>
+        </div>
+  
+      </div>
+      <hr/>
+  
+      <div class="row">
+        <div class="col-md-12">
+          <h3>紹介文</h3>
+          <p><%= @post.content %></p>
+        </div>
+      </div>
+      <hr/>
+  
+      <div class="row">
+        <div class="col-md-12">
+          <h3>復刻リクエストした理由</h3>
+          <p><%= @post.description %></p>
+        </div>
+      </div>
+      <hr/>
+      
+      <div class="row">
+        <% if @photos.length > 0 %>
+          <div id="demo" class="carousel slide" data-ride="carousel">
+  
+            <ul class="carousel-indicators">
+              <% @photos.each do |photo| %>
+                <li data-target="#demo" data-slide-to="<%= photo.id %>"></li>
+              <% end %>
+            </ul>
+          
+            <div class="carousel-inner">
+              <% @photos.each do |photo| %>
+                <div class="carousel-item <%= 'active' if photo.id == @photos[0].id %>">
+                  <%= image_tag photo.image.url(), width: "100%" %>
+                </div>
+              <% end %>
+            </div>
+          
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          
+          </div>
+        <% end %>
+      </div>
+      <hr/>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <%= thumbnail_youtube(@post) if @post.url %>
+        </div>
+      </div>
+      <hr/>
+      
+  
+    </div>  
+    
+    <div class="col-md-4">
+        <div class="card mb-2">
+          <div class="card-body">
+            <div class="border border-danger rounded">
+              <h5 class="text-center text-danger font-weight-bold mt-3">リクエスト投票数</h5>
+              <% if @post.favorites.count>0 %>
+                <h5 class="text-center text-danger font-weight-bold"><%= @post.favorites.count%>票</h5>
+              <% else %>
+                <h5 class="text-center text-danger font-weight-bold">0票</h5>
+              <% end %>
+            </div>
+          </div>
+            <% if @favorite.present? %>
+              <%= link_to 'リクエスト投票しました！', favorite_path(@post), method: :delete, class: 'btn btn-danger' %>
+            <% else %>
+              <%= link_to 'リクエスト投票する。', post_favorites_path(@post), method: :post, class: 'btn btn-primary' %>
+            <% end %>
+        </div>
+      <div>投票コメント</div>
+      <div id="comment_area">
+        <%= render partial: "comments/index", locals: {comments: @comments, post: @post} %>
+      </div>
+        <% if user_signed_in? %>
+          <%= render partial: "comments/form", locals: {comment: @comment, post: @post} %>
+        <% end %>
+    </div>
+  </div>
+</div>

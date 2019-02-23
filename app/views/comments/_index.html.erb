@@ -1,0 +1,15 @@
+<% comments.each do |comment| %>
+  <% unless comment.id.nil? %>
+    <div class="card mb-2">
+      <div class="card-body">
+          <h5 class="card-title"><%= link_to comment.user.name, user_path(comment.user.id) %></h5><hr/>
+          <p class="card-text"><%= simple_format(comment.content) %></p>
+          <% if user_signed_in? %>
+          <% if comment.user_id == @current_user.id %>
+            <%= link_to "Delete", post_comment_path(@post.id, comment.id), class:"btn btn-primary" , method: :delete, data: {confirm: "本当に削除しますか？"}, remote: true %>
+          <% end %>   
+          <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

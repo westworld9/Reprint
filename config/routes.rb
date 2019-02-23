@@ -1,3 +1,24 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
+  root "posts#index"
+  devise_for :users
+  resources :posts, except: [:edit] do
+    member do
+      get 'description'
+      
+      get 'photo_upload'
+        
+      get 'video'
+    end 
+    resources :photos, only:[:create, :destroy]
+    resources :comments, only:[:index, :create, :destroy]
+    resources :favorites, only:[:create, :destroy], shallow: true
+  end
+  
+   
+  resources :users, only:[:show]
+  
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end

@@ -1,0 +1,60 @@
+<div class="container header">
+    <div class="row">
+      <div class="col-md-3">
+        <%= render 'post_menu',locals: {post: @post} %>
+      </div>
+      <div class="col-md-9">
+        <div class="card">
+    
+          <div class="card-header">
+            タイトル、紹介文、復刊リクエスト編集
+          </div>
+    
+          <div class="card-body">
+            <div class="container">
+              <%= form_for @post do |f| %>
+                  <div class="row"> 
+                    <div class="col-md-6 select">
+                      <div class="form-group">
+                        <label>カテゴリー</label>
+                        <%= f.select :category, [["DVD", "DVD"], ["ゲーム", "ゲーム"], ["本", "本"], ["その他", "その他"]],
+                                      id: "category", prompt: "カテゴリー選択", class: "form-control" %>
+                      </div>
+                    </div>
+          
+                    <div class="col-md-6 select">
+                      <div class="form-group">
+                        <label>ジャンル</label>
+                        <%= f.select :genre, [["ドラマ", "ドラマ"], ["アクション", "アクション"], ["SF", "SF"], ["ファンタジー", "ファンタジー"], ["ミステリー・サスペンス", "ミステリー・サスペンス"], ["コメディ", "コメディ"], ["ロマンス", "ロマンス"], ["ホラー", "ホラー"], ["ドキュメンタリー", "ドキュメンタリー"], ["その他", "その他"]],
+                                      id: "genre", prompt: "カテゴリー選択", class: "form-control" %>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>タイトル名</label>
+                    <%= f.text_field :title, placeholder: "タイトルを入力してください", class: "form-control", required: true %>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>紹介文</label>
+                    <%= f.text_area :content, rows: 3, placeholder: "作品の紹介文を入力してください", class: "form-control", required: true %>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>復刊リクエスト文</label>
+                    <%= f.text_area :description, rows: 3, placeholder: "作品の紹介文を入力してください", class: "form-control", required: true %>
+                  </div>
+              
+                <div class="text-center">
+                  <%= f.submit "Save", class: "btn btn-form" %>
+                </div>
+    
+              <% end %>
+            </div>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+</div>

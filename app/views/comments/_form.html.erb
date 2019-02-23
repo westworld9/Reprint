@@ -1,0 +1,7 @@
+<%= form_with(model: [post, comment]) do |f| %>
+
+  <div class="form-group">
+    <%= f.text_area :content,cols:"36" %>
+    <%= f.submit "投稿する", id:"btn" ,class: "form-control" %>
+  </div>
+<% end %>
