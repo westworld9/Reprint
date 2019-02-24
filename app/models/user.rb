@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  validates :name, presence: true,  length: { in: 1..40 }
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy

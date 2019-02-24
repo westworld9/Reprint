@@ -31,8 +31,13 @@
             <br/><br/>
           
             <div class="row">
-              <div class="offset-md-4 col-md-4">
-                <%= f.submit "Search", class: "btn btn-normal btn-block" %>
+              <div class="offset-md-2 col-md-4">
+                <%= button_tag type: "submit", class: "btn btn-normal btn-block" do %>
+                  <i class="fas fa-search mr-2"></i>検索
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <%= link_to '検索条件クリア', url_for, class: "btn btn-normal btn-block" %>
               </div>
             </div>
           <% end %>

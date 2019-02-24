@@ -9,6 +9,8 @@ class PhotosController < ApplicationController
 
       @photos = @post.photos
       redirect_back(fallback_location: request.referer, notice: "Saved...")
+    else 
+      redirect_back(fallback_location: request.referer, alert: "投稿に失敗しました")
     end
     
     def destroy 

@@ -2,6 +2,7 @@
   <div class="row"> 
     <div class="col-md-3">
       <%= link_to "プロフィール",user_path(current_user.id),class:"btn page-link text-dark d-inline-block" %>
+      <%= link_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete,class:"btn btn-danger btn-block mt-5" %></p>
     </div>
     <div class="col-md-9 text-center">
       <div class="card"> 
