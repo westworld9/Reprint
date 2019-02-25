@@ -20,8 +20,8 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.find(params[:id])
-    
-    respond_to do |format|
+
+　　respond_to do |format|
       @comment.destroy
       format.js{ render :index }
     end
