@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(content: params[:comment][:content], post_id:params[:post_id])
+    
     respond_to do |format|
       if @comment.save
         format.js{ render :index }
@@ -19,6 +20,7 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.find(params[:id])
+    
     respond_to do |format|
       @comment.destroy
       format.js{ render :index }

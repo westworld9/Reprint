@@ -13,12 +13,12 @@
             <div class="row"> 
               <div class="offset-md-3 col-md-6"> 
                 <%= form_for @post, url: post_photos_path(@post.id),method: :post, html: {multipart: true } do |f| %> 
-                    <div class="form-group">
-                      <span class="btn page-link text-dark d-inline-block btn-file text-babu"> 
-                        <i class="fas fa-cloud-upload-alt"></i> 画像を選択 
-                        <%= file_field_tag "images[]", type: :file, multiple: :true %>
-                      </span> 
-                    </div> 
+                  <div class="form-group">
+                    <span class="btn page-link text-dark d-inline-block btn-file text-babu"> 
+                      <i class="fas fa-cloud-upload-alt"></i> 画像を選択 
+                      <%= file_field_tag "images[]", type: :file, multiple: :true %>
+                    </span> 
+                  </div> 
                   
                   <div class="text-center"> 
                     <%= f.submit "画像を追加", class: "btn btn-form" %>

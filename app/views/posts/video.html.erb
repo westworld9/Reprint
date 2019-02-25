@@ -11,10 +11,10 @@
             <div class="container"> 
               <%= form_for @post do |f| %>
     
-                  <div class="form-group">
-                    <label>紹介ページにyoutubeの動画を埋め込むことができます</label>
-                    <%= f.text_field :url, placeholder: "youtubeの動画URLを貼り付けてください", class: "form-control", required: true, id: "autoaddress" %>
-                  </div>
+                <div class="form-group">
+                  <label>紹介ページにyoutubeの動画を埋め込むことができます</label>
+                  <%= f.text_field :url, placeholder: "youtubeの動画URLを貼り付けてください", class: "form-control", required: true, id: "autoaddress" %>
+                </div>
     
                 <div class="text-center">
                   <%= f.submit "Save", class: "btn btn-form" %>

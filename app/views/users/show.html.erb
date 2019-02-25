@@ -1,79 +1,79 @@
 <div class="container header"> 
   <div class="row"> 
-      <div class="col-md-3">
-        <div class="center">
-            <% if @user.avatar.url.present? %>
-              <%= image_tag @user.avatar.url,  class:"avatar-full" %>
-            <% else %>
-              <%= image_tag "/assets/icon.png",  class:"avatar-full" %>
-            <% end %>
-        </div>
-        <div class="card">
-          <div class="card-header font-weight-bold"><%= @user.name %></div>
-          <div class="card-body">
-            <ul class="sidebar-list">
-              <% if user_signed_in? %> 
-                <% if @user.id == current_user.id %>
-                <li><%= link_to "プロフィール編集",edit_user_registration_path(current_user.id),class:"btn page-link text-dark d-inline-block" %></li>
-                <% end %> 
-              <% end %>
-            </ul>
-          </div>
-        </div>
+    <div class="col-md-3">
+      <div class="center">
+        <% if @user.avatar.url.present? %>
+          <%= image_tag @user.avatar.url,  class:"avatar-full" %>
+        <% else %>
+          <%= image_tag "/assets/icon.png",  class:"avatar-full" %>
+        <% end %>
       </div>
-      <div class="col-md-9"> 
-        <ul id="myTab" class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a href="#home" id="home-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="home" aria-selected="true">投稿した作品一覧<span class="badge"><%= @posts.count %></span></a>
-          </li>
-          <li class="nav-item">
-            <a href="#profile" id="profile-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="profile" aria-selected="false">リクエスト投票した作品一覧<span class="badge"><%= @favorites.count %></span></a>
-          </li>
-        </ul>
-        <div id="myTabContent" class="tab-content mt-3">
-          <div id="home" class="tab-pane active" role="tabpanel" aria-labelledby="home-tab">
-            <% @posts.each do |post| %>
-              <div class="card flex-md-row mb-4 shadow-sm h-md-250 callout callout-warning">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-primary"><%= post.category %>:<%= post.genre %></strong>
-                  <h4 class="mb-0">
-                    <a class="text-dark"><%= post.title %></a>
-                  </h4>
-                  <div class="mb-1 text-muted">Nov 12</div>
-                  <p class="card-text mb-auto"><%= post.content.truncate(50) %></p>
-                  <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      投稿内容を編集する
-                    </button>
-                    <div class="dropdown-menu">
-                      <%= link_to "タイトル、紹介文編集", description_post_path(post),class:"dropdown-item"%>
-                      <%= link_to "画像編集", photo_upload_post_path(post), class:"dropdown-item" %>
-                      <%= link_to "動画編集", video_post_path(post), class:"dropdown-item" %>
-                    </div>
-                  </div>
-                </div>
-                <%= image_tag post.cover_photo(nil),class:"card-img-right flex-auto d-none d-lg-block", style:"width: 300px; height: 210px;"%>
-              </div>
+      <div class="card">
+        <div class="card-header font-weight-bold"><%= @user.name %></div>
+        <div class="card-body">
+          <ul class="sidebar-list">
+            <% if user_signed_in? %> 
+              <% if @user.id == current_user.id %>
+                <li><%= link_to "プロフィール編集",edit_user_registration_path(current_user.id),class:"btn page-link text-dark d-inline-block" %></li>
+              <% end %> 
             <% end %>
-          </div>
-          <div id="profile" class="tab-pane" role="tabpanel" aria-labelledby="profile-tab"> 
-            <% @favorites.each do |favorite| %> 
-              <div class="card flex-md-row mb-4 shadow-sm h-md-250 callout callout-warning">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-primary"><%= favorite.post.category %>:<%= favorite.post.genre %></strong>
-                  <h4 class="mb-0">
-                    <a class="text-dark"><%= favorite.post.title %></a>
-                  </h4>
-                  <div class="mb-1 text-muted">Nov 12</div>
-                  <p class="card-text mb-auto"><%= favorite.post.content.truncate(50) %></p>
-                  <%= link_to "詳細", favorite.post %>
-                </div>
-                <%= image_tag favorite.post.cover_photo(nil),class:"card-img-right flex-auto d-none d-lg-block", style:"width: 300px; height: 210px;"%>
-              </div>
-            <% end %>
-          </div>
-          
+          </ul>
         </div>
       </div>
     </div>
+    <div class="col-md-9"> 
+      <ul id="myTab" class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a href="#home" id="home-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="home" aria-selected="true">投稿した作品一覧<span class="badge"><%= @posts.count %></span></a>
+        </li>
+        <li class="nav-item">
+          <a href="#profile" id="profile-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="profile" aria-selected="false">リクエスト投票した作品一覧<span class="badge"><%= @favorites.count %></span></a>
+        </li>
+      </ul>
+      <div id="myTabContent" class="tab-content mt-3">
+        <div id="home" class="tab-pane active" role="tabpanel" aria-labelledby="home-tab">
+          <% @posts.each do |post| %>
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250 callout callout-warning">
+              <div class="card-body d-flex flex-column align-items-start">
+                <strong class="d-inline-block mb-2 text-primary"><%= post.category %>:<%= post.genre %></strong>
+                <h4 class="mb-0">
+                  <a class="text-dark"><%= post.title %></a>
+                </h4>
+                <div class="mb-1 text-muted">Nov 12</div>
+                <p class="card-text mb-auto"><%= post.content.truncate(50) %></p>
+                <div class="btn-group">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      投稿内容を編集する
+                  </button>
+                  <div class="dropdown-menu">
+                    <%= link_to "タイトル、紹介文編集", description_post_path(post),class:"dropdown-item"%>
+                    <%= link_to "画像編集", photo_upload_post_path(post), class:"dropdown-item" %>
+                    <%= link_to "動画編集", video_post_path(post), class:"dropdown-item" %>
+                  </div>
+                </div>
+              </div>
+              <%= image_tag post.cover_photo(nil),class:"card-img-right flex-auto d-none d-lg-block", style:"width: 300px; height: 210px;"%>
+            </div>
+          <% end %>
+        </div>
+        <div id="profile" class="tab-pane" role="tabpanel" aria-labelledby="profile-tab"> 
+          <% @favorites.each do |favorite| %> 
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250 callout callout-warning">
+              <div class="card-body d-flex flex-column align-items-start">
+                <strong class="d-inline-block mb-2 text-primary"><%= favorite.post.category %>:<%= favorite.post.genre %></strong>
+                <h4 class="mb-0">
+                  <a class="text-dark"><%= favorite.post.title %></a>
+                </h4>
+                <div class="mb-1 text-muted">Nov 12</div>
+                <p class="card-text mb-auto"><%= favorite.post.content.truncate(50) %></p>
+                <%= link_to "詳細", favorite.post %>
+              </div>
+              <%= image_tag favorite.post.cover_photo(nil),class:"card-img-right flex-auto d-none d-lg-block", style:"width: 300px; height: 210px;"%>
+            </div>
+          <% end %>
+        </div>
+          
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,69 +1,68 @@
 <section class="jumbotron text-center" style="background-image: url(/assets/light.jpg); background-size: cover;">
-      <div class="container">
-        <h1 class="jumbotron-heading text-white font-weight-bold">Reprint</h1>
-        <p class="lead text-white font-weight-bold">廃盤で手に入らなくなったDVDやゲームを皆様からの投票で復活させよう。　
+  <div class="container">
+    <h1 class="jumbotron-heading text-white font-weight-bold">Reprint</h1>
+    <p class="lead text-white font-weight-bold">廃盤で手に入らなくなったDVDやゲームを皆様からの投票で復活させよう。　
         まずは復刊リクエスト一覧を検索しリクエスト投票をしよう!</p>
-         <%= search_form_for(@q, method: :get) do |f| %>
-            <div class="row">
-              <div class="col-md-3 select">
-                <div class="form-group">
-                  <label class="text-white">カテゴリー</label>
-                  <%= f.select :category_eq, [["DVD", "DVD"], ["ゲーム", "ゲーム"], ["本", "本"], ["その他", "その他"]],
+      <%= search_form_for(@q, method: :get) do |f| %>
+        <div class="row">
+          <div class="col-md-3 select">
+            <div class="form-group">
+              <label class="text-white">カテゴリー</label>
+              <%= f.select :category_eq, [["DVD", "DVD"], ["ゲーム", "ゲーム"], ["本", "本"], ["その他", "その他"]],
                             id: "category", prompt: "カテゴリー選択", class: "form-control" %>
-                </div>
-              </div>
+            </div>
+          </div>
 
-              <div class="col-md-3 select">
-                <div class="form-group">
-                  <label class="text-white">ジャンル</label>
-                  <%= f.select :genre_eq, [["ドラマ", "ドラマ"], ["アクション", "アクション"], ["SF", "SF"], ["ファンタジー", "ファンタジー"], ["ミステリー・サスペンス", "ミステリー・サスペンス"], ["コメディ", "コメディ"], ["ロマンス", "ロマンス"], ["ホラー", "ホラー"], ["ドキュメンタリー", "ドキュメンタリー"], ["その他", "その他"]],
+          <div class="col-md-3 select">
+            <div class="form-group">
+              <label class="text-white">ジャンル</label>
+              <%= f.select :genre_eq, [["ドラマ", "ドラマ"], ["アクション", "アクション"], ["SF", "SF"], ["ファンタジー", "ファンタジー"], ["ミステリー・サスペンス", "ミステリー・サスペンス"], ["コメディ", "コメディ"], ["ロマンス", "ロマンス"], ["ホラー", "ホラー"], ["ドキュメンタリー", "ドキュメンタリー"], ["その他", "その他"]],
                             id: "genre", prompt: "ジャンル選択", class: "form-control" %>
-                </div>
-              </div>
+            </div>
+          </div>
               
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="text-white">タイトル検索</label>
-                  <%= f.text_field :title_cont, placeholder: "タイトルで検索", class: "form-control", id: "autolocation" %>
-                </div>
-              </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="text-white">タイトル検索</label>
+              <%= f.text_field :title_cont, placeholder: "タイトルで検索", class: "form-control", id: "autolocation" %>
             </div>
-            <br/><br/>
+          </div>
+        </div>
+        <br/><br/>
           
-            <div class="row">
-              <div class="offset-md-2 col-md-4">
-                <%= button_tag type: "submit", class: "btn btn-normal btn-block" do %>
-                  <i class="fas fa-search mr-2"></i>検索
-                <% end %>
-              </div>
-              <div class="col-md-4">
-                <%= link_to '検索条件クリア', url_for, class: "btn btn-normal btn-block" %>
-              </div>
-            </div>
-          <% end %>
-    </section>
+        <div class="row">
+          <div class="offset-md-2 col-md-4">
+            <%= button_tag type: "submit", class: "btn btn-normal btn-block" do %>
+              <i class="fas fa-search mr-2"></i>検索
+            <% end %>
+          </div>
+          <div class="col-md-4">
+            <%= link_to '検索条件クリア', url_for, class: "btn btn-normal btn-block" %>
+          </div>
+        </div>
+      <% end %>
+</section>
 
 <br/> 
 <div class="container">
   <div class="row">
     <% @posts.each do |post| %>
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-1 blue-hover">
-        <div class="card-header preview">
-              <%= image_tag post.cover_photo(nil),class:"image-tag"%>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title font-weight-bold"><%= post.title.truncate(14)%></h5>
-          <span class="badge badge-pill badge-primary mb-3"><%= post.category %></span>
-          <span class="badge badge-pill badge-primary mb-3"><%= post.genre %></span>
-          <p class="card-text"><%= post.content.truncate(50) %></p>
-        </div>
-        <div class="card-footer">
-          <%= link_to "詳細",post_path(post),class:"btn btn-primary" %>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-1 blue-hover">
+          <div class="card-header preview">
+            <%= image_tag post.cover_photo(nil),class:"image-tag"%>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold"><%= post.title.truncate(14)%></h5>
+            <span class="badge badge-pill badge-primary mb-3"><%= post.category %></span>
+            <span class="badge badge-pill badge-primary mb-3"><%= post.genre %></span>
+            <p class="card-text"><%= post.content.truncate(50) %></p>
+          </div>
+          <div class="card-footer">
+            <%= link_to "詳細",post_path(post),class:"btn btn-primary" %>
+          </div>
         </div>
       </div>
-    </div>
-        
     <% end %>
   </div>
 </div>

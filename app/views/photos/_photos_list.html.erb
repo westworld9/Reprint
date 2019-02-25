@@ -9,9 +9,9 @@
             <%= image_tag photo.image.url() %>
           </div>
           <div class="card-body"> 
-              <%= link_to post_photo_path(photo.post_id, photo), remote: true, method: :delete, data: { confirm: "削除してよろしいですか" } do %> 
-                <i class="fas fa-trash-alt"></i>
-              <% end %>
+            <%= link_to post_photo_path(photo.post_id, photo), remote: true, method: :delete, data: { confirm: "削除してよろしいですか" } do %> 
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
           </div>
         </div>
        </div>

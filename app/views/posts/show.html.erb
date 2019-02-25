@@ -13,17 +13,16 @@
           <h2 class="font-weight-bold"><%= @post.title %></h2>
         </div>
         <div class="col-md-4 text-center mt-4">
-            <% if @post.user.avatar.url.present? %>
-              <%= image_tag @post.user.avatar.url, class: "img-circle avatar-large" %><br>
-           <% else %>
-              <%= image_tag "/assets/icon.png",  class:"img-circle avatar-large" %>
-            <% end %>
+          <% if @post.user.avatar.url.present? %>
+            <%= image_tag @post.user.avatar.url, class: "img-circle avatar-large" %><br>
+          <% else %>
+            <%= image_tag "/assets/icon.png",  class:"img-circle avatar-large" %>
+          <% end %>
           <%= @post.user.name %>
         </div>
       </div>
       <hr/>
       
-  
       <div class="text-babu">
         <div class="row text-center row-space-1">
           <div class="col-md-6">
@@ -38,7 +37,6 @@
           <div class="col-md-6"><%= @post.category %></div>
           <div class="col-md-6"><%= @post.genre %></div>
         </div>
-  
       </div>
       <hr/>
   
@@ -99,23 +97,23 @@
     </div>  
     
     <div class="col-md-4">
-        <div class="card mb-2">
-          <div class="card-body">
-            <div class="border border-danger rounded">
-              <h5 class="text-center text-danger font-weight-bold mt-3">リクエスト投票数</h5>
-              <% if @post.favorites.count>0 %>
-                <h5 class="text-center text-danger font-weight-bold"><%= @post.favorites.count%>票</h5>
-              <% else %>
-                <h5 class="text-center text-danger font-weight-bold">0票</h5>
-              <% end %>
-            </div>
-          </div>
-            <% if @favorite.present? %>
-              <%= link_to 'リクエスト投票しました！', favorite_path(@post), method: :delete, class: 'btn btn-danger' %>
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="border border-danger rounded">
+            <h5 class="text-center text-danger font-weight-bold mt-3">リクエスト投票数</h5>
+            <% if @post.favorites.count>0 %>
+              <h5 class="text-center text-danger font-weight-bold"><%= @post.favorites.count%>票</h5>
             <% else %>
-              <%= link_to 'リクエスト投票する。', post_favorites_path(@post), method: :post, class: 'btn btn-primary' %>
+              <h5 class="text-center text-danger font-weight-bold">0票</h5>
             <% end %>
+          </div>
         </div>
+          <% if @favorite.present? %>
+            <%= link_to 'リクエスト投票しました！', favorite_path(@post), method: :delete, class: 'btn btn-danger' %>
+          <% else %>
+            <%= link_to 'リクエスト投票する。', post_favorites_path(@post), method: :post, class: 'btn btn-primary' %>
+          <% end %>
+      </div>
       <div>投票コメント</div>
       <div id="comment_area">
         <%= render partial: "comments/index", locals: {comments: @comments, post: @post} %>

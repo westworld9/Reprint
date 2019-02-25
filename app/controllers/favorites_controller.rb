@@ -1,5 +1,6 @@
 class FavoritesController < ApplicationController
   before_action :login_user
+  
   def create
     @post = Post.find(params[:post_id])
     @favorite = current_user.favorites.build(post_id: params[:post_id])
@@ -12,8 +13,8 @@ class FavoritesController < ApplicationController
     @favorite = current_user.favorites.find_by(post_id: params[:id])
     @favorite.destroy
     redirect_to post_path(@post)
-    
   end
+  
   private 
   
   def login_user 
