@@ -43,9 +43,7 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
-
-
-　private
+  private
 
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
