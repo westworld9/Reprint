@@ -11,41 +11,51 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,:omniauthable,omniauth_providers: %i(twitter)
   mount_uploader :avatar, AvatarUploader
   
-  def self.create_unique_string
-    SecureRandom.uuid
-  end
+  devise :database_authenticatable, :registerable,:confirmable,
+         :recoverable, :rememberable, :trackable,:validatable,:omniauthable,omniauth_providers: [:twitter]
 
-  def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
+  attr_accessor :current_password
 
-    unless user
-      user = User.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        email:    User.dummy_email(auth),
-        password: Devise.friendly_token[0, 20],
-        name: auth.info.name,
-        avatar: auth.info.avatar
-      )
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+      user.email = User.dummy_email(auth)
+      user.remote_user_avatar_url = auth["info"]["avatar"]
     end
-    user
   end
 
-  def update_without_current_password(params, *options)
-    params.delete(:current_password)
-
-    if params[:password].blank? && params[:password_confirmation].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation)
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"]) do |user|
+        user.attributes = params
+      end
+    else
+      super
     end
-
-    result = update_attributes(params, *options)
-    clean_up_passwords
-    result
   end
+
+  def update_with_password(params, *options)
+    if encrypted_password.blank?           
+      update_attributes(params, *options)   
+    else
+      super
+    end
+  end
+
+
   private
+    def self.dummy_email(auth)
+      "#{auth["uid"]}-#{auth["provider"]}@example.com"
+    end
 
-  def self.dummy_email(auth)
-    "#{auth.uid}-#{auth.provider}@example.com"
-  end
+  protected
+    def confirmation_required?
+      false
+    end
+
+    def password_required?
+      super && provider.blank? 
+    end
 end
