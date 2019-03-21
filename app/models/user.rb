@@ -14,48 +14,22 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,:confirmable,
          :recoverable, :rememberable, :trackable,:validatable,:omniauthable,omniauth_providers: [:twitter]
 
-  attr_accessor :current_password
-
-  def self.from_omniauth(auth)
-    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
-      user.email = User.dummy_email(auth)
-      user.remote_user_avatar_url = auth["info"]["avatar"]
-    end
+  def self.create_unique_string
+    SecureRandom.uuid
   end
 
-  def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
-      new(session["devise.user_attributes"]) do |user|
-        user.attributes = params
-      end
-    else
-      super
+  def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+
+    unless user
+      user = User.new(provider: auth.provider,
+                      uid:      auth.uid,
+                      email:    "#{auth.uid}-#{auth.provider}@example.com",
+                      password: Devise.friendly_token[0, 20],
+                      name:     auth.info.name
+      )
     end
+    user.save
+    user
   end
-
-  def update_with_password(params, *options)
-    if encrypted_password.blank?           
-      update_attributes(params, *options)   
-    else
-      super
-    end
-  end
-
-
-  private
-    def self.dummy_email(auth)
-      "#{auth["uid"]}-#{auth["provider"]}@example.com"
-    end
-
-  protected
-    def confirmation_required?
-      false
-    end
-
-    def password_required?
-      super && provider.blank? 
-    end
 end

@@ -25,9 +25,9 @@
       </div>
       <br/>
       <div class="form-group"> 
-       <a class="btn btn-block btn-primary" href="/users/auth/twitter">
-        <span class="fa fa-twitter"></span> Twitterでログイン
-       </a>
+        <%= link_to user_twitter_omniauth_authorize_path,class:"btn btn-block btn-primary" do %>
+          <i class="fab fa-twitter"></i> Twitterでログイン
+        <% end %>
       </div>
     <% end %>
 
