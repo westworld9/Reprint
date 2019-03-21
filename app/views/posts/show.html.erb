@@ -13,8 +13,8 @@
           <h2 class="font-weight-bold"><%= @post.title %></h2>
         </div>
         <div class="col-md-4 text-center mt-4">
-          <% if @post.user.avatar.url.present? %>
-            <%= image_tag @post.user.avatar.url, class: "img-circle avatar-large" %><br>
+          <% if @post.user.avatar_url.present? %>
+            <%= image_tag @post.user.avatar_url, class: "img-circle avatar-large" %><br>
           <% else %>
             <%= image_tag "/assets/icon.png",  class:"img-circle avatar-large" %>
           <% end %>

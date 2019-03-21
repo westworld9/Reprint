@@ -11,8 +11,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,:omniauthable,omniauth_providers: %i(twitter)
   mount_uploader :avatar, AvatarUploader
   
-  devise :database_authenticatable, :registerable,:confirmable,
-         :recoverable, :rememberable, :trackable,:validatable,:omniauthable,omniauth_providers: [:twitter]
+  attr_accessor :current_password
 
   def self.create_unique_string
     SecureRandom.uuid

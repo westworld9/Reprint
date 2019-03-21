@@ -3,7 +3,7 @@
     <div class="col-md-3">
       <div class="center">
         <% if @user.avatar.url.present? %>
-          <%= image_tag @user.avatar.url,  class:"avatar-full" %>
+          <%= image_tag @user.avatar_url,  class:"avatar-full" %>
         <% else %>
           <%= image_tag "/assets/icon.png",  class:"avatar-full" %>
         <% end %>

@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   validates :title, presence: true,  length: { in: 1..40 } 
-  validates :content, presence: true,  length: { in: 50..1000 } 
-  validates :description, presence: true,  length: { in: 50..1000 } 
+  validates :content, presence: true,  length: { in: 30..1000 } 
+  validates :description, presence: true,  length: { in: 30..1000 } 
   validates :category, presence: true
   validates :genre, presence: true
   
