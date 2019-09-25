@@ -7,6 +7,9 @@
         <% else %>
           <%= image_tag "/assets/icon.png",  class:"avatar-full" %>
         <% end %>
+        <% if current_user && current_user != @user %> 
+          <%= link_to "メッセージを送る", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: :post, class: "btn page-link text-dark d-inline-block" %> 
+        <% end %>
       </div>
       <div class="card">
         <div class="card-header font-weight-bold"><%= @user.name %></div>

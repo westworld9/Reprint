@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   end
   
   resources :users, only:[:show]
+
+  resources :conversations, only: [:index, :create] do
+    resources :messages, only: [:index, :create]
+  end
   
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  mount ActionCable.server => '/cable'
 end
